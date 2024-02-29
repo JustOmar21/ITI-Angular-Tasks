@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IProduct } from 'src/app/Models/IProduct';
 
@@ -8,29 +8,40 @@ import { IProduct } from 'src/app/Models/IProduct';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent {
-  products : IProduct[] =[];
-  productForm : FormGroup = new FormGroup({
-    name : new FormControl("",[Validators.required,Validators.minLength(5)]),
-    category : new FormControl("",[Validators.required,Validators.minLength(4)]),
-    quantity : new FormControl(5,[Validators.required,Validators.min(5)]),
-    price : new FormControl(100,[Validators.required,Validators.min(100)]),
-    discount : new FormControl(5 , [Validators.required,Validators.min(5) , Validators.max(25)])
+  @Output() sendEvent: EventEmitter<IProduct[]> = new EventEmitter();
+  products: IProduct[] = [];
+  productForm: FormGroup = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    category: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    quantity: new FormControl(null, [Validators.required, Validators.min(5)]),
+    price: new FormControl(null, [Validators.required, Validators.min(100)]),
+    discount: new FormControl(null, [Validators.required, Validators.min(5), Validators.max(25)]),
+    onSale: new FormControl()
   });
 
-  get nameControl(){
+  get nameControl() {
     return this.productForm.get("name");
   }
-  get categoryControl(){
+  get categoryControl() {
     return this.productForm.get("category");
   }
-  get quantityControl(){
+  get quantityControl() {
     return this.productForm.get("quantity");
   }
-  get priceControl(){
+  get priceControl() {
     return this.productForm.get("price");
   }
-  get discountControl(){
+  get discountControl() {
     return this.productForm.get("discount");
+  }
+  get saleControl(){
+    return this.productForm.get("sale");
+  }
+
+  sendProducts() {
+    let product: IProduct = this.productForm.value;
+    this.products.push(product);
+    this.sendEvent.emit(this.products)
   }
 
 }

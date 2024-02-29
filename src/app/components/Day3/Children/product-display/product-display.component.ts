@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IProduct } from 'src/app/Models/IProduct';
 
 @Component({
   selector: 'app-product-display',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-display.component.css']
 })
 export class ProductDisplayComponent {
-
+  @Input() products : IProduct[] = [];
 }

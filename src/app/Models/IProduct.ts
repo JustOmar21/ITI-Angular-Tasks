@@ -4,5 +4,5 @@ quantity:number,
 category:string,
 discount:number,
 price:number,
-onSale:boolean
+onSale:boolean | undefined
 }
