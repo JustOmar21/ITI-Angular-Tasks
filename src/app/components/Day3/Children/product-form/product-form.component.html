@@ -1,0 +1,81 @@
+<form class="text-center mt-4 bg-body-secondary" formGroupName="productForm">
+
+  <div>
+    <label for="name" class="form-label mt-5">Product Name</label>
+    <input type="text" class="form-control w-50 m-auto" name="name" formControlName="name" [ngClass]="{
+      'is-valid': nameControl?.valid,
+      'is-invalid': nameControl?.errors && nameControl?.touched
+    }">
+    <div class="invalid-feedback">
+      <ng-container *ngIf="nameControl?.hasError('minlength')">
+        Name must be more than 5 letters
+      </ng-container>
+      <br>
+      <ng-container *ngIf="nameControl?.hasError('required')">
+        Name is required
+      </ng-container>
+    </div>
+    <br>
+  </div>
+  <div>
+    <label for="quantity" class="form-label">Quantity</label>
+    <input type="number" class="form-control w-50 m-auto" name="quantity"  formControlName="quantity">
+    <div class="invalid-feedback">
+      <ng-container *ngIf="quantityControl?.hasError('minlength')">
+        Quantity must be more than 5 units
+      </ng-container>
+      <br>
+      <ng-container *ngIf="quantityControl?.hasError('required')">
+        Quantity is required
+      </ng-container>
+    </div>
+  </div>
+  <br>
+  <div>
+    <label for="category" class="form-label">Category</label>
+    <input type="text" class="form-control w-50 m-auto" name="category" formControlName="category">
+    <div class="invalid-feedback">
+      <ng-container *ngIf="categoryControl?.hasError('minlength')">
+        Category must be more than 4 letters
+      </ng-container>
+      <br>
+      <ng-container *ngIf="categoryControl?.hasError('required')">
+        Category is required
+      </ng-container>
+    </div>
+  </div>
+  <br>
+  <div>
+    <label for="discount" class="form-label">Discount</label>
+    <input type="number" class="form-control w-50 m-auto" name="discount" formControlName="discount">
+    <div class="invalid-feedback">
+      <ng-container *ngIf="discountControl?.hasError('minlength') || nameControl?.hasError('maxlength')">
+        Discount must be between 5% and 25%
+      </ng-container>
+      <br>
+      <ng-container *ngIf="discountControl?.hasError('required')">
+        Discount is required
+      </ng-container>
+    </div>
+  </div>
+  <div>
+    <label for="price" class="form-label">Price</label>
+    <input type="number" class="form-control w-50 m-auto" name="price" formControlName="price">
+    <div class="invalid-feedback">
+      <ng-container *ngIf="priceControl?.hasError('minlength')">
+        Price must be more than 100
+      </ng-container>
+      <br>
+      <ng-container *ngIf="priceControl?.hasError('required')">
+        Price is required
+      </ng-container>
+    </div>
+  </div>
+  <div class="mt-4">
+    <label for="sale" class="form-label">On Sale ?</label>
+    <input type="checkbox" class="form-check-control ms-2" name="sale">
+  </div>
+  <br>
+  <input type="submit" class="btn btn-primary w-50 mb-5" value="Add Student">
+  <br>
+</form>
